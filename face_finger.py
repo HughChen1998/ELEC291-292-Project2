@@ -68,7 +68,7 @@ threshold = 60
 blurValue = 41  
 bgSubThreshold = 50
 #bgModel = cv2.BackgroundSubtractorMOG2(0, bgSubThreshold)
-bgModel = cv2.createBackgroundSubtractorMOG2()
+#bgModel = cv2.createBackgroundSubtractorMOG2()
 starter = 1
 
 ap = argparse.ArgumentParser()
@@ -163,19 +163,7 @@ def click2(word):
 def click3(word):
     on_or_off = 1
     ser.write(str(word).encode('ascii'))
-#-----------------------------------the function below is copied-------------------------------------------
 
-def removeBG(frame, bgModel):
-    f = bgModel.apply(frame)
-    # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-    # res = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, kernel)
-
-    k = np.ones((3, 3), np.uint8)
-    f = cv2.erode(f, k, iterations=1)
-    returnn = cv2.bitwise_and(frame, frame, mask=f)
-    return returnn
-
-#-----------------the function above is copied----------------------------------------------------------
 #detect_hand (cap)
 def peek():
     global peeking
@@ -194,7 +182,7 @@ def fingers():
 def camera():
     global on_or_off, bgSubThreshold, blurValue, threshold, cap_region_y_end, cap_region_x_begin, bgModel, counter, direction, pts_right, pts_left, pts_top, dX_L, dY_L, dX_R, dY_R, dX_T, dY_T, do_bit
     lst = []
-    bgModel = cv2.createBackgroundSubtractorMOG2(0, 0)
+    #bgModel = cv2.createBackgroundSubtractorMOG2(0, 0)
     #bgModel = cv2.bgsegm.createBackgroundSubtractorGMG()
     ret, img = cap.read()
     if do_bit:
